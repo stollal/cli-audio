@@ -49,4 +49,6 @@ class Player:
     def callback(self, in_data, frame_count, time_info, status):
         data = self.wf.readframes(frame_count)
         return (data, pyaudio.paContinue)
+    
 
+	

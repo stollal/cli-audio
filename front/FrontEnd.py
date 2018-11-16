@@ -31,10 +31,13 @@ class FrontEnd:
                 self.updateSong()
                 self.stdscr.touchwin()
                 self.stdscr.refresh()
+            elif c == ord('l'):
+                self.musicLibrary()
     
     def updateSong(self):
         self.stdscr.addstr(15,10, "                                        ")
         self.stdscr.addstr(15,10, "Now playing: " + self.player.getCurrentSong())
+        self.stdscr.addstr(17,10, "Up Next: " ) ## + self.player.getNextSong())
 
     def changeSong(self):
         changeWindow = curses.newwin(5, 40, 5, 50)
@@ -49,7 +52,23 @@ class FrontEnd:
         self.stdscr.refresh()
         self.player.stop()
         self.player.play(path.decode(encoding="utf-8"))
-        
+
+   #Where you can enter your paths and they will go into the queue to create the playlist 
+    def musicLibrary(self):
+        changeWindow = curses.newwin(25, 40, 25, 50)
+        changeWindow.border()
+        changeWindow.addstr(0,0, "Music Library",curses.A_REVERSE)
+        changeWindow.addstr(2,0, "To add music to playlist just enter path and hit enter.",curses.A_REVERSE)
+        changeWindow.addstr(3,0, "Create Playlist",curses.A_REVERSE)
+        self.stdscr.refresh()
+        curses.echo()
+        path = changeWindow.getstr(4,1, 30)
+        curses.noecho()
+        del changeWindow
+        self.stdscr.touchwin()
+        self.stdscr.refresh()
+        self.player.stop()
+        self.player.play(path.decode(encoding="utf-8"))
 
     def quit(self):
         self.player.stop()
