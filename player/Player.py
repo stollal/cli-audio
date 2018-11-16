@@ -49,6 +49,13 @@ class Player:
     def callback(self, in_data, frame_count, time_info, status):
         data = self.wf.readframes(frame_count)
         return (data, pyaudio.paContinue)
-    
 
-	
+# Returns the song that is up next
+    def getNextSong(self):
+        return self.nextSong
+
+# Song Queue puts the paths entered in a queue and continuously plays through them until reaches end
+    def songQueue(self, track):
+        if self.pause = False
+            self.wf = wave.open(track, 'rb')
+            
