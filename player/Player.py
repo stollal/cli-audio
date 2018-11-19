@@ -56,6 +56,6 @@ class Player:
 
 # Song Queue puts the paths entered in a queue and continuously plays through them until reaches end
     def songQueue(self, track):
-        if self.pause = False
+        if self.pause == False:
             self.wf = wave.open(track, 'rb')
             

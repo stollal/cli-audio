@@ -1,7 +1,7 @@
 import curses
 import curses.textpad
-
 import sys
+from exception_handling import handle as ha
 
 class FrontEnd:
 
@@ -12,6 +12,8 @@ class FrontEnd:
 
     def menu(self, args):
         self.stdscr = curses.initscr()
+        if self.stdscr.getmaxyx()[0] < 25 or self.stdscr.getmaxyx()[1] < 80:
+            raise ha.CLI_Audio_Screen_Size_Exception('Screen size is too small: Minimum width is 80, and minimum length is 25')
         self.stdscr.border()
         self.stdscr.addstr(0,0, "cli-audio",curses.A_REVERSE)
         self.stdscr.addstr(5,10, "c - Change current song")
