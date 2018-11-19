@@ -3,6 +3,7 @@
 import pyaudio
 import wave
 import time
+from exception_handling import handle as ha
 
 class Player:
     def __init__(self):
@@ -24,7 +25,11 @@ class Player:
     def play(self, track):
         self.paused = False
         self.currentSong = track
-        self.wf = wave.open(track, 'rb')
+        try:
+            self.wf = wave.open(track, 'rb') 
+        except ha.CLI_Audio_File_Exception:
+            print('File not found')
+            raise
 
         # instantiate PyAudio (1)
         self.p = pyaudio.PyAudio()

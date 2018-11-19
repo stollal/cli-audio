@@ -55,7 +55,7 @@ class FrontEnd:
         self.player.stop()
         self.player.play(path.decode(encoding="utf-8"))
 
-   #Where you can enter your paths and they will go into the queue to create the playlist 
+        #Where you can enter your paths and they will go into the queue to create the playlist 
     def musicLibrary(self):
         changeWindow = curses.newwin(25, 40, 25, 50)
         changeWindow.border()
