@@ -3,7 +3,8 @@
 import pyaudio
 import wave
 import time
-from exception_handling import handle as ha
+import os
+from exceptions import Exceptions as ex
 
 class Player:
     def __init__(self):
@@ -25,11 +26,10 @@ class Player:
     def play(self, track):
         self.paused = False
         self.currentSong = track
-        try:
-            self.wf = wave.open(track, 'rb') 
-        except ha.CLI_Audio_File_Exception:
-            print('File not found')
-            raise
+        if os.path.isfile(track):
+            self.wf = wave.open(track, 'rb')
+        else:
+            raise ex.CLI_Audio_File_Exception('File not found')
 
         # instantiate PyAudio (1)
         self.p = pyaudio.PyAudio()
